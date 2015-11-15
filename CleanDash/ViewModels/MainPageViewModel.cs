@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Threading;
+using GalaSoft.MvvmLight.Command;
 
 namespace CleanDash.ViewModels
 {
@@ -19,37 +19,21 @@ namespace CleanDash.ViewModels
                 OnPropertyChanged("CurrentDateTime");
             }
         }
-        private int _timeFontSize;
-        public int TimeFontSize
-        {
-            get
-            {
-                return _timeFontSize;
-            }
-            set
-            {
-                _timeFontSize = value;
-                OnPropertyChanged("TimeFontSize");
-            }
-        }
-        private int _dateFontSize;
-        public int DateFontSize
-        {
-            get
-            {
-                return _dateFontSize;
-            }
-            set
-            {
-                _dateFontSize = value;
-                OnPropertyChanged("DateFontSize");
-            }
-        }
+
+        public SettingsMenuViewModel SettingsMenu { get; set; }
+        public RelayCommand SettingsButtonClickCommand { get; set; }
 
         public MainPageViewModel()
         {
             UpdateDateTime(null,null);
-            TimeFontSize = 100;
+            SettingsMenu = new SettingsMenuViewModel();
+            SettingsButtonClickCommand = new RelayCommand(SettingsButtonClick);
+            SettingsMenu.IsVisible = false;
+        }
+
+        private void SettingsButtonClick()
+        {
+            SettingsMenu.IsVisible = !SettingsMenu.IsVisible;
         }
 
         public void UpdateDateTime(object sender, object e)

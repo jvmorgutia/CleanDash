@@ -9,10 +9,7 @@ namespace CleanDash.ViewModels
         protected void OnPropertyChanged(string itemChanged)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
-            if (handler != null)
-            {
-                handler(this, new PropertyChangedEventArgs(itemChanged));
-            }
+            handler?.Invoke(this, new PropertyChangedEventArgs(itemChanged));
         }
     }
 }

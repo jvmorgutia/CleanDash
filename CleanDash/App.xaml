@@ -7,6 +7,7 @@
     RequestedTheme="Light">
 
     <Application.Resources>
+        <converters:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
         <converters:DateTimeToDateConverter x:Key="ToDateConverter"/>
         <converters:DateTimeToTimeConverter x:Key="ToTimeConverter"/>
     </Application.Resources>
