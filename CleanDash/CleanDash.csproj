@@ -100,6 +100,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Converters\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Converters\PercentageToOpacityConverter.cs" />
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="Converters\DateTimeToDateConverter.cs" />
     <Compile Include="Converters\DateTimeToTimeConverter.cs" />

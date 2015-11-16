@@ -4,13 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    d:DesignHeight="300"
-    d:DesignWidth="400">
+   >
 
-    <Grid Background="#77ffffff">
+    <Grid Background="#99778899" Margin="20" BorderBrush="White" BorderThickness="4">
         <Grid.RowDefinitions>
             <RowDefinition Height ="auto"/>
+            <RowDefinition Height="4"/>
             <RowDefinition Height ="auto"/>
             <RowDefinition Height ="auto"/>
         </Grid.RowDefinitions>
@@ -20,28 +19,41 @@
         </Grid.ColumnDefinitions>
         <TextBlock Grid.Row="0"
                    Grid.Column="0"
+                   Grid.ColumnSpan="2"
                    Text="Settings Menu"
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
-                   Margin="20"/>
-        <TextBlock Grid.Row="1"
+                   Margin="10"
+                   />
+        <Rectangle Grid.Row="1" 
+                   Fill="White"
+                   Grid.ColumnSpan="2"/>
+        <Button Grid.Column="1"
+                Grid.Row="0"
+                Content="X"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+                Command="{Binding CloseMenuClickCommand}"/>
+        <TextBlock Grid.Row="2"
                    Grid.Column="0"
                    Text="Time Font Size"
                    Margin="5,0"/>
-        <TextBlock Grid.Row="2"
+        <TextBlock Grid.Row="3"
                    Grid.Column="0"
                    Text="Date Font Size"
                     Margin="5,0"/>
         
-        <Slider Grid.Row="1"
-                Grid.Column="1"
-                Maximum="150"
-                Minimum="35"
-                Value="{Binding TimeFontSize, Mode=TwoWay}" />
         <Slider Grid.Row="2"
                 Grid.Column="1"
-                Maximum="150"
+                Maximum="190"
                 Minimum="35"
+                Margin="5"
+                Value="{Binding TimeFontSize, Mode=TwoWay}" />
+        <Slider Grid.Row="3"
+                Grid.Column="1"
+                Maximum="100"
+                Minimum="20"
+                Margin="5"
                 Value="{Binding DateFontSize, Mode=TwoWay}" />
         
 

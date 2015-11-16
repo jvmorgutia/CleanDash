@@ -1,4 +1,5 @@
 ﻿using System;
+using Windows.UI.Xaml;
 using GalaSoft.MvvmLight.Command;
 
 namespace CleanDash.ViewModels
@@ -19,21 +20,59 @@ namespace CleanDash.ViewModels
                 OnPropertyChanged("CurrentDateTime");
             }
         }
-
-        public SettingsMenuViewModel SettingsMenu { get; set; }
+        private double _displayBrightness;
+        public double DisplayBrightness
+        {
+            get { return _displayBrightness; }
+            set
+            {
+                _displayBrightness = value;
+                OnPropertyChanged("DisplayBrightness");
+            }
+        }
+        private bool _brightnessSliderIsVisible;
+        public bool BrightnessSliderIsVisible
+        {
+            get
+            {
+                return _brightnessSliderIsVisible;
+            }
+            set
+            {
+                _brightnessSliderIsVisible = value;
+                OnPropertyChanged("BrightnessSliderIsVisible");
+            }
+        }
+        public SettingsMenuViewModel SettingsMenuViewModel { get; set; }
         public RelayCommand SettingsButtonClickCommand { get; set; }
+        public RelayCommand BrightnessButtonClickCommand { get; set; }
+
 
         public MainPageViewModel()
         {
             UpdateDateTime(null,null);
-            SettingsMenu = new SettingsMenuViewModel();
+            SettingsMenuViewModel = new SettingsMenuViewModel();
             SettingsButtonClickCommand = new RelayCommand(SettingsButtonClick);
-            SettingsMenu.IsVisible = false;
+            BrightnessButtonClickCommand = new RelayCommand(BrightnessButtonClick);
+
+            DisplayBrightness = 75;
+            SettingsMenuViewModel.IsVisible = false;
+            BrightnessSliderIsVisible = false;
+
+            var timer = new DispatcherTimer();
+            timer.Tick += UpdateDateTime;
+            timer.Interval = new TimeSpan(0, 0, 1);
+            timer.Start();
         }
 
         private void SettingsButtonClick()
         {
-            SettingsMenu.IsVisible = !SettingsMenu.IsVisible;
+            SettingsMenuViewModel.IsVisible = !SettingsMenuViewModel.IsVisible;
+        }
+
+        private void BrightnessButtonClick()
+        {
+            BrightnessSliderIsVisible = !BrightnessSliderIsVisible;
         }
 
         public void UpdateDateTime(object sender, object e)

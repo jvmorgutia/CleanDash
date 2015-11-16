@@ -1,4 +1,6 @@
-﻿namespace CleanDash.ViewModels
+﻿using GalaSoft.MvvmLight.Command;
+
+namespace CleanDash.ViewModels
 {
     public class SettingsMenuViewModel : BaseViewModel
     {
@@ -41,8 +43,14 @@
             }
         }
 
+        public RelayCommand CloseMenuClickCommand { get; set; }
+
         public SettingsMenuViewModel()
         {
+            CloseMenuClickCommand = new RelayCommand(() =>
+            {
+                IsVisible = false;
+            });
             TimeFontSize = 120;
             DateFontSize = 30;
         }

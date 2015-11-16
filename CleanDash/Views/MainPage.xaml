@@ -5,40 +5,74 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:views="using:CleanDash.Views"
+    xmlns:viewModels="using:CleanDash.ViewModels"
     mc:Ignorable="d">
+    
+    <Page.DataContext>
+        <viewModels:MainPageViewModel/>
+    </Page.DataContext>
+    <Grid Background="Black">
+        <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+          Opacity="{Binding DisplayBrightness, Converter={StaticResource PercentageToOpacityConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="80"/>
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
 
-        </Grid.RowDefinitions>
-        
-        <TextBlock Grid.Row="0"
+            <TextBlock Grid.Row="0"
                    Text="{Binding CurrentDateTime, Mode=OneWay, Converter={StaticResource ToTimeConverter}}" 
-                   FontSize="{Binding SettingsMenu.TimeFontSize}"                   
+                   FontSize="{Binding SettingsMenuViewModel.TimeFontSize}"                   
                    VerticalAlignment="Bottom" 
                    HorizontalAlignment="Center"
                    />
-        
-        <TextBlock Grid.Row="1"
+
+            <TextBlock Grid.Row="1"
                    Text="{Binding CurrentDateTime, Mode = OneWay, Converter={StaticResource ToDateConverter} }" 
-                   FontSize="{Binding SettingsMenu.DateFontSize}"                   
+                   FontSize="{Binding SettingsMenuViewModel.DateFontSize}"                   
                    VerticalAlignment="Top" 
                    HorizontalAlignment="Center"
                    />
-        <Button Grid.Row="0"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Right"
+            <StackPanel Grid.Row="2"
+                    VerticalAlignment="Bottom"
+                    HorizontalAlignment="Stretch"
+                    >
+                <Button 
                 Content="Settings"
                 Command="{Binding SettingsButtonClickCommand}"/>
-        <views:SettingsMenuView Grid.Row="0"
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+
+                    </Grid.ColumnDefinitions>
+                    
+                    <Button Grid.Column="0"
+                            Content="Brightness"
+                            Command="{Binding BrightnessButtonClickCommand}"/>
+                    <Button Grid.Column="2"
+                            Content="FullScreen"
+                            HorizontalAlignment="Right"
+                            Click="ToggleFullScreenClick"/>
+
+                    <Slider Grid.Column ="1"
+                       Visibility="{Binding BrightnessSliderIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
+                       Value="{Binding DisplayBrightness, Mode=TwoWay}"
+                       Margin="20,0"
+                       Minimum="20"
+                       Maximum="100"
+                       />
+                </Grid>
+            </StackPanel>
+            <views:SettingsMenuView Grid.Row="0"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
-                                DataContext="{Binding SettingsMenu}"
+                                DataContext="{Binding SettingsMenuViewModel}"
                                 Visibility="{Binding IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-            
-        </views:SettingsMenuView>
+                                
+            </views:SettingsMenuView>
+        </Grid>
     </Grid>
 </Page>
