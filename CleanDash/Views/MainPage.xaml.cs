@@ -18,7 +18,7 @@ namespace CleanDash
 
         private void ToggleFullScreenClick(object sender, RoutedEventArgs e)
         {
-            if (_view.IsFullScreen)
+            if (_view.IsFullScreenMode)
                 _view.ExitFullScreenMode();
             else
                 _view.TryEnterFullScreenMode();

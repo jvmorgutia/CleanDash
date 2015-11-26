@@ -15,12 +15,16 @@
         <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
           Opacity="{Binding DisplayBrightness, Converter={StaticResource PercentageToOpacityConverter}}">
             <Grid.RowDefinitions>
+                <RowDefinition Height="6*"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="80"/>
 
             </Grid.RowDefinitions>
-
+            <Grid Grid.Row="0"
+                  Grid.RowSpan="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
             <TextBlock Grid.Row="0"
                    Text="{Binding CurrentDateTime, Mode=OneWay, Converter={StaticResource ToTimeConverter}}" 
                    FontSize="{Binding SettingsMenuViewModel.TimeFontSize}"                   
@@ -34,45 +38,61 @@
                    VerticalAlignment="Top" 
                    HorizontalAlignment="Center"
                    />
-            <StackPanel Grid.Row="2"
+            </Grid>
+            <Grid Grid.Row="1"
                     VerticalAlignment="Bottom"
                     HorizontalAlignment="Stretch"
                     >
-                <Button 
-                Content="Settings"
-                Command="{Binding SettingsButtonClickCommand}"/>
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
 
-                    </Grid.ColumnDefinitions>
-                    
-                    <Button Grid.Column="0"
-                            Content="Brightness"
-                            Command="{Binding BrightnessButtonClickCommand}"/>
-                    <Button Grid.Column="2"
-                            Content="FullScreen"
+                <Button Grid.Column="0"
+                        Grid.Row="0"
+                        Command="{Binding SettingsButtonClickCommand}">
+                    <Image Source="../Images/Icons/settings-icon.png"
+                           Stretch="Uniform"/>
+                </Button>
+
+
+
+                <Button Grid.Column="0"
+                            Grid.Row="1"
+                            Command="{Binding BrightnessButtonClickCommand}"
+                        >
+                    <Image Source="../Images/Icons/brightness-icon.png"
+                           Stretch="Uniform"/>
+                </Button>
+                <Button Grid.Column="2"
+                            Grid.Row="1"
                             HorizontalAlignment="Right"
-                            Click="ToggleFullScreenClick"/>
+                            Click="ToggleFullScreenClick">
+                    <Image Source="../Images/Icons/fullscreen-icon.png"
+                           Stretch="Uniform"/>
+                </Button>
 
-                    <Slider Grid.Column ="1"
+                <Slider Grid.Column ="1"
+                            Grid.Row="1"
                        Visibility="{Binding BrightnessSliderIsVisible, Converter={StaticResource BooleanToVisibilityConverter}}"
                        Value="{Binding DisplayBrightness, Mode=TwoWay}"
                        Margin="20,0"
                        Minimum="20"
                        Maximum="100"
                        />
-                </Grid>
-            </StackPanel>
-            <views:SettingsMenuView Grid.Row="0"
+            </Grid>
+        </Grid>
+        <views:SettingsMenuView Grid.Row="0"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
                                 DataContext="{Binding SettingsMenuViewModel}"
                                 Visibility="{Binding IsVisible, Converter={StaticResource BooleanToVisibilityConverter}}">
-                                
-            </views:SettingsMenuView>
-        </Grid>
+
+        </views:SettingsMenuView>
     </Grid>
 </Page>
