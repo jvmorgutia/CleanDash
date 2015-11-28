@@ -6,10 +6,10 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
    >
 
-    <Grid Background="#99778899" Margin="20" BorderBrush="White" BorderThickness="4">
+    <Grid Background="#f0778899" Margin="20" BorderBrush="White" BorderThickness="2" CornerRadius="8,8,8,8">
         <Grid.RowDefinitions>
             <RowDefinition Height ="auto"/>
-            <RowDefinition Height="4"/>
+            <RowDefinition Height="2"/>
             <RowDefinition Height ="auto"/>
             <RowDefinition Height ="auto"/>
         </Grid.RowDefinitions>
@@ -33,28 +33,35 @@
                 Content="X"
                 VerticalAlignment="Top"
                 HorizontalAlignment="Right"
+                BorderThickness="0"
+                
+                
                 Command="{Binding CloseMenuClickCommand}"/>
         <TextBlock Grid.Row="2"
                    Grid.Column="0"
                    Text="Time Font Size"
-                   Margin="5,0"/>
+                   Margin="5,0"
+                   VerticalAlignment="Center"/>
         <TextBlock Grid.Row="3"
                    Grid.Column="0"
                    Text="Date Font Size"
-                    Margin="5,0"/>
+                    Margin="5,0"
+                   VerticalAlignment="Center"/>
         
         <Slider Grid.Row="2"
                 Grid.Column="1"
                 Maximum="190"
                 Minimum="35"
                 Margin="5"
-                Value="{Binding TimeFontSize, Mode=TwoWay}" />
+                Value="{Binding TimeFontSize, Mode=TwoWay}" 
+                VerticalAlignment="Center"/>
         <Slider Grid.Row="3"
                 Grid.Column="1"
                 Maximum="100"
                 Minimum="20"
                 Margin="5"
-                Value="{Binding DateFontSize, Mode=TwoWay}" />
+                Value="{Binding DateFontSize, Mode=TwoWay}" 
+                VerticalAlignment="Center"/>
         
 
 
